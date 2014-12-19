@@ -64,15 +64,16 @@ describe User do
     it { should_not be_valid }
   end
 
-=begin
-  describe "when user is already saved" do
-    before do
+	
+  describe "when email address is have uppercase and user is already saved" do
+
+  	it "should eq downcase email" do
+  		@user.email = "USER@eXample.com"
+    	downcase_email = @user.email.downcase
       @user.save
-    end
-  
-    it { should be_valid }
+		  expect(@user.reload.email).to eq downcase_email
+		end  	
   end
-=end
 
 	describe "when password is not present" do
 		before { @user.password = @user.password_confirmation = " " }
